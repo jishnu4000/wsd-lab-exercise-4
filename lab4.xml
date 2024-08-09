@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- <!DOCTYPE hospital SYSTEM "lab4.dtd"> -->
+<?xml-stylesheet href="lab4.xsl" type="text/xsl"?>
 <hospital xmlns="http://www.jewelhealth.com/home"
     xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.jewelhealth.com/ lab4.xsd">
