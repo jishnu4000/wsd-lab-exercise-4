@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jewel Health</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="stylesheet" href="./location.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <script defer src="https://kit.fontawesome.com/cc6961611c.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+  <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+  crossorigin=""></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+  <script defer src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
+  <script defer src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <a class="navbar-brand mb-0 h1" href="./index.html">
+        Jewel Health
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="./index.html"><i class="fa-solid fa-house"></i> Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./location.html"><i class="fa-solid fa-map"></i> Location</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <main>
+    <!-- LOCATION -->
+    <div class="">
+      <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-10 col-sm-10 col-xs-10 mx-auto">
+              <div class="location-title text-center fw-bolder">
+                <h2>Location</h2>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-10 col-sm-10 col-xs-10 mx-auto">
+            <!-- OSM Here -->
+            <div id="map-section" class=""></div>
+            <div id="errorArea" class="alert d-none"></div>          
+          </div>
+            </div>
+          </div>
+        </div>
+  </main>
+  <footer class="d-flex flex-wrap justify-content-between align-items-center py-2 border-top">
+    <div class="col-md-4 d-flex align-items-center">
+      <a href="/" class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">
+        <svg class="bi" width="30" height="24"><use xlink:href="#bootstrap"></use></svg>
+      </a>
+      <span class="mb-3 mb-md-0 text-body-secondary">© 2024 Jishnu Company, Inc</span>
+    </div>
+    <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+      <li class="ms-3"><a class="text-body-secondary" href="#"><i class="fa-brands fa-twitter"></i></a></li>
+      <li class="ms-3"><a class="text-body-secondary" href="#"><i class="fa-brands fa-instagram"></i></a></li>
+      <li class="ms-3"><a class="text-body-secondary" href="#"><i class="fa-brands fa-facebook"></i></li>
+    </ul>
+  </footer>
+  <!-- OSM Script Here -->
+  <script>
+    window.onload = event => {
+      console.log("page is loaded");
+      if('geolocation' in navigator){
+          navigator.geolocation.getCurrentPosition(pos => {
+            // current pos coords
+            const curr_pos_lat = pos.coords.latitude;
+            const curr_pos_lon = pos.coords.longitude;
+
+            // hospital map location coords
+            const set_loc_lat = 12.93419;
+            const set_loc_lon = 77.6109248;
+
+            // Display the map
+            console.log("Map View");
+            var map = L.map('map-section').setView([set_loc_lat, set_loc_lon], 13);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+            
+            // Add a marker
+            console.log("Map Marker");
+            L.marker([set_loc_lat, set_loc_lon]).addTo(map)
+                .bindPopup(`Latitude: ${set_loc_lat} <br/> Longitude: ${set_loc_lon}`)
+                .openPopup(); 
+            
+            // add route
+            L.Routing.control({
+              waypoints: [
+                  L.latLng(curr_pos_lat, curr_pos_lon),
+                  L.latLng(set_loc_lat, set_loc_lon)
+              ],
+              routeWhileDragging: true
+             }).addTo(map);
+
+            L.marker([curr_pos_lat, curr_pos_lon]).bindPopup(`You are here`).addTo(map); 
+
+            document.getElementById("map-section").classList.remove("d-none");
+
+        }, error => {
+            let msg="";
+            switch(error.code){
+                case error.PERMISSION_DENIED:
+                    msg="User Denied Permission";
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    msg="Can't Locate User's Position";
+                    break;
+                case error.TIMEOUT:
+                    msg="Time out";
+                    break;
+            }
+          let errorArea=document.getElementById("errorArea");
+          errorArea.innerHTML=msg;
+          errorArea.classList.remove("d-none");
+        })
+      }
+    }
+  </script>
+</body>
+</html>
