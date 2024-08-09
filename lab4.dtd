@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT hospital (patients, doctors, addresses, appointments, rooms, medicalRecords, prescriptions, labTests, billing)>
+
+<!ELEMENT patients (patient+)>
+<!ELEMENT patient (patientName, patientDOB, patientAge, patientGender, patientContactNumber, patientEmail, patientEmergencyNumber)>
+<!ATTLIST patient id ID #REQUIRED address_id IDREF #REQUIRED record_id IDREF #REQUIRED>
+
+<!ELEMENT patientName (#PCDATA)>
+<!ELEMENT patientDOB (#PCDATA)>
+<!ELEMENT patientAge (#PCDATA)>
+<!ELEMENT patientGender (#PCDATA)>
+<!ELEMENT patientContactNumber (#PCDATA)>
+<!ELEMENT patientEmail (#PCDATA)>
+<!ELEMENT patientEmergencyNumber (#PCDATA)>
+
+<!ELEMENT doctors (doctor+)>
+<!ELEMENT doctor (doctorName, doctorDOB, doctorAge, doctorGender, doctorContactNumber, doctorEmail, doctorMedicalLicenseNumber, yearsOfExperience)>
+<!ATTLIST doctor id ID #REQUIRED address_id IDREF #REQUIRED>
+
+<!ELEMENT doctorName (#PCDATA)>
+<!ELEMENT doctorDOB (#PCDATA)>
+<!ELEMENT doctorAge (#PCDATA)>
+<!ELEMENT doctorGender (#PCDATA)>
+<!ELEMENT doctorContactNumber (#PCDATA)>
+<!ELEMENT doctorEmail (#PCDATA)>
+<!ELEMENT doctorMedicalLicenseNumber (#PCDATA)>
+<!ELEMENT yearsOfExperience (#PCDATA)>
+
+<!ELEMENT addresses (address+)>
+<!ELEMENT address (addressLine1, city, state, country, postalCode, contactNumber)>
+<!ATTLIST address id ID #REQUIRED>
+
+<!ELEMENT addressLine1 (#PCDATA)>
+<!ELEMENT city (#PCDATA)>
+<!ELEMENT state (#PCDATA)>
+<!ELEMENT country (#PCDATA)>
+<!ELEMENT postalCode (#PCDATA)>
+<!ELEMENT contactNumber (#PCDATA)>
+
+<!ELEMENT appointments (appointment+)>
+<!ELEMENT appointment (appointmentReason, bookingType, bookingDate, appointmentDate, appointmentConfirmation, appointmentStatus)>
+<!ATTLIST appointment id ID #REQUIRED patient_id IDREF #REQUIRED doctor_id IDREF #REQUIRED room_id IDREF #REQUIRED>
+
+<!ELEMENT appointmentReason (#PCDATA)>
+<!ELEMENT bookingType (#PCDATA)>
+<!ELEMENT bookingDate (#PCDATA)>
+<!ELEMENT appointmentDate (#PCDATA)>
+<!ELEMENT appointmentConfirmation (#PCDATA)>
+<!ELEMENT appointmentStatus (#PCDATA)>
+
+<!ELEMENT rooms (room+)>
+<!ELEMENT room (roomName, roomType, roomLocation, capacity, availability, reservedDate, roomEquipment)>
+<!ATTLIST room id ID #REQUIRED assigned_doctor_id IDREF #REQUIRED>
+
+<!ELEMENT roomName (#PCDATA)>
+<!ELEMENT roomType (#PCDATA)>
+<!ELEMENT roomLocation (#PCDATA)>
+<!ELEMENT capacity (#PCDATA)>
+<!ELEMENT availability (#PCDATA)>
+<!ELEMENT reservedDate (#PCDATA)>
+<!ELEMENT roomEquipment (#PCDATA)>
+
+<!ELEMENT medicalRecords (medicalRecord+)>
+<!ELEMENT medicalRecord (recordStartDate, recordType, medicalHistory, treatmentHistory, importantNotes)>
+<!ATTLIST medicalRecord id ID #REQUIRED patient_id IDREF #REQUIRED doctor_id IDREF #REQUIRED>
+
+<!ELEMENT recordStartDate (#PCDATA)>
+<!ELEMENT recordType (#PCDATA)>
+<!ELEMENT medicalHistory (#PCDATA)>
+<!ELEMENT treatmentHistory (#PCDATA)>
+<!ELEMENT importantNotes (#PCDATA)>
+
+<!ELEMENT prescriptions (prescription+)>
+<!ELEMENT prescription (prescriptionDate, medicineName, medicineType, dosageInstructions, duration, importantNotes)>
+<!ATTLIST prescription id ID #REQUIRED patient_id IDREF #REQUIRED doctor_id IDREF #REQUIRED prescription_bill_id IDREF #REQUIRED>
+
+<!ELEMENT prescriptionDate (#PCDATA)>
+<!ELEMENT medicineName (#PCDATA)>
+<!ELEMENT medicineType (#PCDATA)>
+<!ELEMENT dosageInstructions (#PCDATA)>
+<!ELEMENT duration (#PCDATA)>
+
+<!ELEMENT labTests (labTest+)>
+<!ELEMENT labTest (testType, testDate, testResults, testStatus, importantNotes)>
+<!ATTLIST labTest id ID #REQUIRED patient_id IDREF #REQUIRED doctor_id IDREF #REQUIRED labtest_bill_id IDREF #REQUIRED test_room_id IDREF #REQUIRED>
+
+<!ELEMENT testType (#PCDATA)>
+<!ELEMENT testDate (#PCDATA)>
+<!ELEMENT testResults (#PCDATA)>
+<!ELEMENT testStatus (#PCDATA)>
+
+<!ELEMENT billing (bill+)>
+<!ELEMENT bill (billDate, billDescription, billAmount, paymentType, paymentDueDate, paymentStatus)>
+<!ATTLIST bill id ID #REQUIRED patient_id IDREF #REQUIRED doctor_id IDREF #REQUIRED bill_address_id IDREF #REQUIRED>
+
+<!ELEMENT billDate (#PCDATA)>
+<!ELEMENT billDescription (#PCDATA)>
+<!ELEMENT billAmount (#PCDATA)>
+<!ELEMENT paymentType (#PCDATA)>
+<!ELEMENT paymentDueDate (#PCDATA)>
+<!ELEMENT paymentStatus (#PCDATA)>

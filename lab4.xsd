@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+           elementFormDefault="unqualified"
+           attributeFormDefault="qualified"
+           targetNamespace="http://www.jewelhealth.com/home"
+           xmlns:h="http://www.jewelhealth.com/home"
+           >
+
+  <!-- Hospital Element -->
+  <xs:element name="hospital">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="patients" type="h:PatientsType"/>
+        <xs:element name="doctors" type="h:DoctorsType"/>
+        <xs:element name="addresses" type="h:AddressesType"/>
+        <xs:element name="appointments" type="h:AppointmentsType"/>
+        <xs:element name="rooms" type="h:RoomsType"/>
+        <xs:element name="medicalRecords" type="h:MedicalRecordsType"/>
+        <xs:element name="prescriptions" type="h:PrescriptionsType"/>
+        <xs:element name="labTests" type="h:LabTestsType"/>
+        <xs:element name="billing" type="h:BillingType"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- Patients Element -->
+  <xs:complexType name="PatientsType">
+    <xs:sequence>
+      <xs:element name="patient" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="patientName" type="xs:string"/>
+            <xs:element name="patientDOB" type="xs:date"/>
+            <xs:element name="patientAge" type="xs:int"/>
+            <xs:element name="patientGender" type="xs:string"/>
+            <xs:element name="patientContactNumber" type="xs:string"/>
+            <xs:element name="patientEmail" type="xs:string"/>
+            <xs:element name="patientEmergencyNumber" type="xs:string"/>
+          </xs:sequence>
+          <xs:attribute name="id" type="xs:ID" use="required"/>
+          <xs:attribute name="address_id" type="xs:IDREF" use="required"/>
+          <xs:attribute name="record_id" type="xs:IDREF" use="required"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Doctors Element -->
+  <xs:complexType name="DoctorsType">
+    <xs:sequence>
+      <xs:element name="doctor" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="doctorName" type="xs:string"/>
+            <xs:element name="doctorDOB" type="xs:date"/>
+            <xs:element name="doctorAge" type="xs:int"/>
+            <xs:element name="doctorGender" type="xs:string"/>
+            <xs:element name="doctorContactNumber" type="xs:string"/>
+            <xs:element name="doctorEmail" type="xs:string"/>
+            <xs:element name="doctorMedicalLicenseNumber" type="xs:int"/>
+            <xs:element name="yearsOfExperience" type="xs:int"/>
+          </xs:sequence>
+          <xs:attribute name="id" type="xs:ID" use="required"/>
+          <xs:attribute name="address_id" type="xs:IDREF" use="required"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Addresses Element -->
+  <xs:complexType name="AddressesType">
+    <xs:sequence>
+      <xs:element name="address" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="addressLine1" type="xs:string"/>
+            <xs:element name="city" type="xs:string"/>
+            <xs:element name="state" type="xs:string"/>
+            <xs:element name="country" type="xs:string"/>
+            <xs:element name="postalCode" type="xs:int"/>
+            <xs:element name="contactNumber" type="xs:string"/>
+          </xs:sequence>
+          <xs:attribute name="id" type="xs:ID" use="required"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Appointments Element -->
+  <xs:complexType name="AppointmentsType">
+    <xs:sequence>
+      <xs:element name="appointment" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="appointmentReason" type="xs:string"/>
+            <xs:element name="bookingType" type="xs:string"/>
+            <xs:element name="bookingDate" type="xs:date"/>
+            <xs:element name="appointmentDate" type="xs:date"/>
+            <xs:element name="appointmentConfirmation" type="xs:string"/>
+            <xs:element name="appointmentStatus" type="xs:string"/>
+          </xs:sequence>
+          <xs:attribute name="id" type="xs:ID" use="required"/>
+          <xs:attribute name="patient_id" type="xs:IDREF" use="required"/>
+          <xs:attribute name="doctor_id" type="xs:IDREF" use="required"/>
+          <xs:attribute name="room_id" type="xs:IDREF" use="required"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Rooms Element -->
+  <xs:complexType name="RoomsType">
+    <xs:sequence>
+      <xs:element name="room" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="roomName" type="xs:string"/>
+            <xs:element name="roomType" type="xs:string"/>
+            <xs:element name="roomLocation" type="xs:string"/>
+            <xs:element name="capacity">
+              <xs:simpleType>
+                <xs:restriction base="xs:int">
+                  <xs:minInclusive value="1"/>
+                </xs:restriction>
+              </xs:simpleType>
+            </xs:element>
+            <xs:element name="availability" type="xs:string"/>
+            <xs:element name="reservedDate" type="xs:date"/>
+            <xs:element name="roomEquipment" type="xs:string"/>
+          </xs:sequence>
+          <xs:attribute name="id" type="xs:ID" use="required"/>
+          <xs:attribute name="assigned_doctor_id" type="xs:IDREF" use="required"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Medical Records Element -->
+  <xs:complexType name="MedicalRecordsType">
+    <xs:sequence>
+      <xs:element name="medicalRecord" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="recordStartDate" type="xs:date"/>
+            <xs:element name="recordType" type="xs:string"/>
+            <xs:element name="medicalHistory" type="xs:string"/>
+            <xs:element name="treatmentHistory" type="xs:string"/>
+            <xs:element name="importantNotes" type="xs:string"/>
+          </xs:sequence>
+          <xs:attribute name="id" type="xs:ID" use="required"/>
+          <xs:attribute name="patient_id" type="xs:IDREF" use="required"/>
+          <xs:attribute name="doctor_id" type="xs:IDREF" use="required"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Prescriptions Element -->
+  <xs:complexType name="PrescriptionsType">
+    <xs:sequence>
+      <xs:element name="prescription" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="prescriptionDate" type="xs:date"/>
+            <xs:element name="medicineName" type="xs:string"/>
+            <xs:element name="medicineType" type="xs:string"/>
+            <xs:element name="dosageInstructions" type="xs:string"/>
+            <xs:element name="duration" type="xs:string"/>
+            <xs:element name="importantNotes" type="xs:string"/>
+          </xs:sequence>
+          <xs:attribute name="id" type="xs:ID" use="required"/>
+          <xs:attribute name="patient_id" type="xs:IDREF" use="required"/>
+          <xs:attribute name="doctor_id" type="xs:IDREF" use="required"/>
+          <xs:attribute name="prescription_bill_id" type="xs:IDREF" use="required"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Lab Tests Element -->
+  <xs:complexType name="LabTestsType">
+    <xs:sequence>
+      <xs:element name="labTest" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="testType" type="xs:string"/>
+            <xs:element name="testDate" type="xs:date"/>
+            <xs:element name="testResults" type="xs:string"/>
+            <xs:element name="testStatus" type="xs:string"/>
+            <xs:element name="importantNotes" type="xs:string"/>
+          </xs:sequence>
+          <xs:attribute name="id" type="xs:ID" use="required"/>
+          <xs:attribute name="patient_id" type="xs:IDREF" use="required"/>
+          <xs:attribute name="doctor_id" type="xs:IDREF" use="required"/>
+          <xs:attribute name="labtest_bill_id" type="xs:IDREF" use="required"/>
+          <xs:attribute name="test_room_id" type="xs:IDREF" use="required"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Billing Element -->
+  <xs:complexType name="BillingType">
+    <xs:sequence>
+      <xs:element name="bill" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="billDate" type="xs:date"/>
+            <xs:element name="billDescription" type="xs:string"/>
+            <xs:element name="billAmount" type="xs:decimal"/>
+            <xs:element name="paymentType" type="xs:string"/>
+            <xs:element name="paymentDueDate" type="xs:date"/>
+            <xs:element name="paymentStatus" type="xs:string"/>
+          </xs:sequence>
+          <xs:attribute name="id" type="xs:ID" use="required"/>
+          <xs:attribute name="patient_id" type="xs:IDREF" use="required"/>
+          <xs:attribute name="doctor_id" type="xs:IDREF" use="required"/>
+          <xs:attribute name="bill_address_id" type="xs:IDREF" use="required"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+</xs:schema>

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- <!DOCTYPE hospital SYSTEM "lab4.dtd"> -->
+<hospital xmlns="http://www.jewelhealth.com/home"
+    xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.jewelhealth.com/ lab4.xsd">
+  <patients>
+    <patient id="P0001" address_id='A0001' record_id="REC0001">
+      <patientName>John Smith</patientName>
+      <patientDOB>1999-10-01</patientDOB>
+      <patientAge>25</patientAge>
+      <patientGender>Male</patientGender>
+      <patientContactNumber>1234567890</patientContactNumber>
+      <patientEmail>john.smith@example.com</patientEmail>
+      <patientEmergencyNumber>0987654321</patientEmergencyNumber>
+    </patient>
+  </patients>
+
+  <doctors>
+    <doctor id="D0001" address_id="A0002">
+      <doctorName>Dr. Thomas</doctorName>
+      <doctorDOB>1975-05-12</doctorDOB>
+      <doctorAge>49</doctorAge>
+      <doctorGender>Male</doctorGender>
+      <doctorContactNumber>1234567891</doctorContactNumber>
+      <doctorEmail>dr.thomas@example.com</doctorEmail>
+      <doctorMedicalLicenseNumber>12345</doctorMedicalLicenseNumber>
+      <yearsOfExperience>20</yearsOfExperience>
+    </doctor>
+  </doctors>
+  
+  <addresses>
+    <address id='A0001'>
+      <addressLine1>123 Main St</addressLine1>
+      <city>New York</city>
+      <state>NY</state>
+      <country>USA</country>
+      <postalCode>10001</postalCode>
+      <contactNumber>1234567893</contactNumber>
+    </address>
+    <address id='A0002'>
+      <addressLine1>124 Main St</addressLine1>
+      <city>New Jersey</city>
+      <state>NY</state>
+      <country>USA</country>
+      <postalCode>10002</postalCode>
+      <contactNumber>1334567893</contactNumber>
+    </address>
+  </addresses>
+  
+  <appointments>
+    <appointment id="AP0001" patient_id="P0001" doctor_id="D0001" room_id="RM0001">
+      <appointmentReason>Checkup</appointmentReason>
+      <bookingType>Online</bookingType>
+      <bookingDate>2023-01-10</bookingDate>
+      <appointmentDate>2023-01-15</appointmentDate>
+      <appointmentConfirmation>Yes</appointmentConfirmation>
+      <appointmentStatus>Confirmed</appointmentStatus>
+    </appointment>
+  </appointments>
+
+  <rooms>
+    <room id="RM0001" assigned_doctor_id="D0001">
+      <roomName>Room 101</roomName>
+      <roomType>Consultation</roomType>
+      <roomLocation>1st Floor</roomLocation>
+      <capacity>2</capacity>
+      <availability>Available</availability>
+      <reservedDate>2023-01-15</reservedDate>
+      <roomEquipment>Stethoscope</roomEquipment>
+    </room>
+  </rooms>
+  
+  <medicalRecords>
+    <medicalRecord id="REC0001" patient_id="P0001" doctor_id="D0001">
+      <recordStartDate>2023-01-01</recordStartDate>
+      <recordType>Checkup</recordType>
+      <medicalHistory>Diabetes</medicalHistory>
+      <treatmentHistory>Insulin</treatmentHistory>
+      <importantNotes>None</importantNotes>
+    </medicalRecord>
+  </medicalRecords>
+
+  <prescriptions>
+    <prescription id="PR0001" patient_id="P0001" doctor_id="D0001" prescription_bill_id="B0001">
+      <prescriptionDate>2023-01-15</prescriptionDate>
+      <medicineName>Aspirin</medicineName>
+      <medicineType>Tablet</medicineType>
+      <dosageInstructions>Take one tablet daily</dosageInstructions>
+      <duration>7 days</duration>
+      <importantNotes>None</importantNotes>
+    </prescription>
+  </prescriptions>
+
+  <labTests>
+    <labTest id="LT0001" patient_id="P0001" doctor_id="D0001" labtest_bill_id="B0001" test_room_id="RM0001">
+      <testType>Blood Test</testType>
+      <testDate>2023-01-15</testDate>
+      <testResults>Normal</testResults>
+      <testStatus>Completed</testStatus>
+      <importantNotes>None</importantNotes>
+    </labTest>
+  </labTests>
+
+  <billing>
+    <bill id="B0001" patient_id="P0001" doctor_id="D0001" bill_address_id="A0001">
+      <billDate>2023-01-15</billDate>
+      <billDescription>Consultation fee</billDescription>
+      <billAmount>150.00</billAmount>
+      <paymentType>Credit Card</paymentType>
+      <paymentDueDate>2023-01-20</paymentDueDate>
+      <paymentStatus>Paid</paymentStatus>
+    </bill>
+  </billing>
+</hospital>
