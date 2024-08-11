@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- <!DOCTYPE hospital SYSTEM "lab4.dtd"> -->
 <?xml-stylesheet href="lab4.xsl" type="text/xsl"?>
-<hospital xmlns="http://www.jewelhealth.com/home"
-    xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.jewelhealth.com/ lab4.xsd">
+<?xml-model href="lab4.xsd" type="application/xml" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<hospital xmlns="http://www.jewelhealth.com/"
+    xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance">
   <patients>
     <patient id="P0001" address_id='A0001' record_id="REC0001">
       <patientName>John Smith</patientName>
